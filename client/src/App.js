@@ -1,61 +1,55 @@
 import React, { useState } from "react";
-//hooks:
 import { useNavigate } from "react-router-dom";
-//pages:
 import Header from "./pages/Header";
 import Main from "./pages/Main";
-//MUI styels:
-import { Drawer } from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function App() {
-  // -------routing---------
   const navigate = useNavigate();
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const [isNavOpen, setisNavOpen] = useState(false);
   const travelTo = (dest) => {
-    navigate("/" + dest);
-    setisNavOpen(false);
+    navigate(dest);
+    setIsNavOpen(false);
   };
 
   return (
     <div>
-      <Header setisNavOpen={setisNavOpen} />
+      <Header setIsNavOpen={setIsNavOpen} />
       <Drawer
         anchor="left"
         open={isNavOpen}
-        onClose={() => setisNavOpen(false)}
+        onClose={() => setIsNavOpen(false)}
       >
-        <List>
+        <List sx={{ width: 240 }}>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => travelTo("")}>
-              <ListItemIcon>
-                <HomeIcon color="primary" />
-              </ListItemIcon>
+            <ListItemButton onClick={() => travelTo("/")}>
+              <ListItemIcon><HomeIcon color="primary" /></ListItemIcon>
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
+
           <ListItem disablePadding>
-            <ListItemButton onClick={() => travelTo("info")}>
-              <ListItemIcon>
-                <InfoIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="rules" />
+            <ListItemButton onClick={() => travelTo("/info")}>
+              <ListItemIcon><InfoIcon color="primary" /></ListItemIcon>
+              <ListItemText primary="How it works" />
             </ListItemButton>
           </ListItem>
+
           <ListItem disablePadding>
-            <ListItemButton onClick={() => travelTo("add")}>
-              <ListItemIcon>
-                <AddIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="Add" />
+            <ListItemButton onClick={() => travelTo("/add")}>
+              <ListItemIcon><AddIcon color="primary" /></ListItemIcon>
+              <ListItemText primary="Create post" />
             </ListItemButton>
           </ListItem>
         </List>

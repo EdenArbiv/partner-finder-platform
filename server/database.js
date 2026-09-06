@@ -1,14 +1,13 @@
-const { connect } = require('mongoose')
+const mongoose = require("mongoose");
 
 const connectToMongoDatabase = async () => {
-    try {
-        await connect('mongodb://localhost/Pafy')
-        console.log('connected to mongo database')
-    } catch (err) {
-        console.log(err)
-    }
-}
+  const mongoUri =
+    process.env.MONGO_URI || "mongodb://127.0.0.1:27017/partner_finder";
+
+  await mongoose.connect(mongoUri);
+  console.log("Connected to MongoDB");
+};
 
 module.exports = {
-    connectToMongoDatabase
-}
+  connectToMongoDatabase,
+};
